@@ -1,0 +1,54 @@
+platforms:
+  android:
+    versionName: 1.0.0
+    manifest:
+      -
+        file: AndroidManifest.xml
+        target: manifest/application/activity
+        attrs:
+          'android:screenOrientation': unspecified
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: "<uses-permission android:name=\"android.permission.READ_MEDIA_IMAGES\"/>\n"
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\"/>\n"
+      -
+        file: AndroidManifest.xml
+        target: manifest
+        inject: "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />\n"
+  ios:
+    targets:
+      App:
+        version: 1.0.0
+        xcconfig:
+          -
+            file: App/Config.xcconfig
+            set:
+              TARGETED_DEVICE_FAMILY: '1,2'
+        plist:
+          -
+            replace: true
+            entries:
+              -
+                UISupportedInterfaceOrientations:
+                  - UIInterfaceOrientationPortrait
+                  - UIInterfaceOrientationLandscapeLeft
+                  - UIInterfaceOrientationLandscapeRight
+              -
+                NSCameraUsageDescription: 'Take photos'
+              -
+                NSPhotoLibraryAddUsageDescription: 'Add photos'
+              -
+                NSPhotoLibraryUsageDescription: 'Access photos'
+              -
+                CFBundleLocalizations:
+                  - ja
+              -
+                UISupportedInterfaceOrientations~ipad:
+                  - UIInterfaceOrientationPortrait
+                  - UIInterfaceOrientationPortraitUpsideDown
+                  - UIInterfaceOrientationLandscapeLeft
+                  - UIInterfaceOrientationLandscapeRight
